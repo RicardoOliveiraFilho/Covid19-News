@@ -2,7 +2,7 @@ var CACHE_NAME = "covid19-pwa";
 var urlsToCache = ["/"];
 
 // Install a service worker
-self.addEventListener("install", (event) => {
+this.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
       console.log("Opened cache");
@@ -12,7 +12,7 @@ self.addEventListener("install", (event) => {
 });
 
 // Cache and return requests
-self.addEventListener("fetch", (event) => {
+this.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then(function (response) {
       if (response) {
@@ -24,7 +24,7 @@ self.addEventListener("fetch", (event) => {
 });
 
 // Update a service worker
-self.addEventListener("activate", (event) => {
+this.addEventListener("activate", (event) => {
   var cacheWhitelist = ["pwa-task-manager"];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
